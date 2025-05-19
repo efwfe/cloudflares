@@ -12,6 +12,7 @@
  */
 
 
+
 // The worker will add three endpoints:
 // 1. GET /images
 // 2. GET /images/:id return the image with the given ID
@@ -20,6 +21,9 @@ import { Router } from "itty-router";
 import getImages from "./handlers/get_images";
 import createImage from "./handlers/create_image";
 import getSingleImage from "./handlers/get_single_image";
+import { Env } from './env';
+
+
 const router = Router();
 router.get("/images", getImages)
 	.post("/images", createImage)
