@@ -6,19 +6,41 @@ import worker from '../src/index';
 // `Request` to pass to `worker.fetch()`.
 const IncomingRequest = Request<unknown, IncomingRequestCfProperties>;
 
-describe('Hello World worker', () => {
-	it('responds with Hello World! (unit style)', async () => {
-		const request = new IncomingRequest('http://example.com');
-		// Create an empty context to pass to `worker.fetch()`.
-		const ctx = createExecutionContext();
-		const response = await worker.fetch(request, env, ctx);
-		// Wait for all `Promise`s passed to `ctx.waitUntil()` to settle before running test assertions
-		await waitOnExecutionContext(ctx);
-		expect(await response.text()).toMatchInlineSnapshot(`"Hello World!"`);
-	});
 
-	it('responds with Hello World! (integration style)', async () => {
-		const response = await SELF.fetch('https://example.com');
-		expect(await response.text()).toMatchInlineSnapshot(`"Hello World!"`);
+describe("Photo service", () => {
+	it("return a 404 if a non-existent image is requested", async () => {
+		const response = await SELF.fetch("http://localhost:8787/images/100");
+		expect(response.status).toBe(404);
 	});
 });
+
+
+describe("GET /images", () => {
+	it("return a 200 response", async () => {
+		const response = await SELF.fetch("http://localhost:8787/images");
+		expect(response.status).toEqual(200);
+	});
+
+	it("should return images in the response body", async () => {
+		const response = await SELF.fetch("http://localhost:8787/images");
+		const json = await response.json();
+		expect(json).toEqual(
+			expect.arrayContaining([
+				expect.objectContaining({
+					id:2,
+					url: "http://bar.com/img2",
+					author: "alice",
+				}),
+			])
+		);
+	});
+
+	it("should return a set of number of images if count is provided", async () => {
+		const response = await SELF.fetch("http://localhost:8787/images?count=2");
+		const json = await response.json();
+		expect(json).toHaveLength(2);
+	});
+});
+
+
+

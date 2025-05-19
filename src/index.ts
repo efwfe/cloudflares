@@ -11,8 +11,24 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+
+// The worker will add three endpoints:
+// 1. GET /images
+// 2. GET /images/:id return the image with the given ID
+// 3. POST /images will create a new image
+import { Router } from "itty-router";
+import getImages from "./handlers/get_images";
+import createImage from "./handlers/create_image";
+import getSingleImage from "./handlers/get_single_image";
+const router = Router();
+router.get("/images", getImages)
+	.post("/images", createImage)
+	.get("/images/:id", getSingleImage)
+	.get("*", ()=> new Response("Not found", {status: 404}));
+
+
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
+		return router.fetch(request, env, ctx);
 	},
 } satisfies ExportedHandler<Env>;
