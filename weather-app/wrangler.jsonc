@@ -4,9 +4,17 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "serverless",
-	"main": "src/index.ts",
-	"compatibility_date": "2025-05-15",
+	"name": "weather-app",
+	"main": ".open-next/worker.js",
+	"compatibility_date": "2025-03-01",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".open-next/assets"
+	},
 	"observability": {
 		"enabled": true
 	}
