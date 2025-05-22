@@ -170,3 +170,11 @@ dist
 
 .dev.vars
 .wrangler/
+authentication-service/.dev.vars
+authentication-service/.wrangler/
+authentication-service/node_modules/
+authentication-service/.gitignore
+
+.vscode/
+**/.DS_Store
+**/.vscode

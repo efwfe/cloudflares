@@ -4,26 +4,13 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "serverless",
+	"name": "authentication-service",
 	"main": "src/index.ts",
-	"compatibility_date": "2025-05-15",
+	"compatibility_date": "2025-05-22",
 	"observability": {
 		"enabled": true
 	},
-
-	"d1_databases": [
-		{
-		"binding": "DB",
-		"database_name": "photo-service",
-		"database_id": "5af5d0e7-9ba8-4e2c-9531-3dfaa4409694"
-		}
-	],
-	"services": [
-		{
-			"binding": "AUTH_SERVICE",
-			"service": "authentication-service"
-		}
-	],
+	"workers_dev": false, // make worker private
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

@@ -1,5 +1,5 @@
 {
-	"name": "serverless",
+	"name": "authentication-service",
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
@@ -10,13 +10,10 @@
 		"cf-typegen": "wrangler types"
 	},
 	"devDependencies": {
-		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"@cloudflare/vitest-pool-workers": "^0.7.5",
 		"@cloudflare/workers-types": "^4.20250522.0",
 		"typescript": "^5.5.2",
 		"vitest": "~3.0.7",
 		"wrangler": "^4.16.0"
-	},
-	"dependencies": {
-		"itty-router": "^5.0.18"
 	}
 }
